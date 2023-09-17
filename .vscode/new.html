@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book a Call</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        body {
+            background-image: url('Pictures/background.png'); 
+            background-size: cover;
+            background-position: top;
+            font-family: sans-serif;
+        }
+        .brand-name {
+            position: absolute; /* Absolute positioning for the brand name */
+            top: 20px; /* Adjust the top position as needed */
+            left: 20px; /* Adjust the left position as needed */
+            color: #1b1818;
+            font-size: 24px; /* Adjust the font size as needed */
+            font-weight: bold;
+            font-family: 'Gill Sans';
+        }
+        .form-wrap {
+            width: 675px;
+            background: rgba(218, 205, 162, 0.75);
+            border: 2px solid #f1eded; /* Add a black border */
+            padding: 40px 20px;
+            box-sizing: border-box;
+            position: fixed;
+            left: 50%;
+            top: 35%;
+            transform: translate(-50%, -50%);
+            
+        }
+        h1 {
+            text-align: center;
+            color: #030303;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #050505;
+            text-align: center;
+            border-bottom: 1px solid #000; /* Add an underline */
+            padding-bottom: 10px;
+        }
+        h4 {
+            color: #070707;
+            text-align: center;
+        }
+        label {
+            color: #070707;
+        }
+        
+        input {
+            width: 100%;
+            background: none;
+            border: 1px solid #070707;
+            border-radius: 3px;
+            padding: 6px 15px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #0c0c0c;
+        }
+        input[type="button"] {
+            background: #bac675;
+            border: 0;
+            cursor: pointer;
+            color: #3e3d3d;
+        }
+        input[type="button"]:hover {
+            background: #a4b15c;
+            transition: .6s;
+        }
+        ::placeholder {
+            color: #0b0b0b;
+        }
+    </style>
+</head>
+<body>
+    <span class="brand-name" style="color: #611540 ;">Yav</span>
+    <div class="form-wrap">
+        <form id="callForm"> 
+        
+            <h2 style="color: #050505; text-align: center ">Book a Call </h2><br>
+            <h4 style="color: #070707; text-align: center ">Book a call and our representative will call you within 1hr of selected time</h4><br>
+            <label for="name"style="color: #070707;">Name:</label><br>
+            <input type="text" id="fname" name="fname"><br>
+            
+            <label for="email"style="color: #070707;">Email Id:</label><br>
+            <input type="email" id="email" name="email"><br>
+            
+            <label for="Phone"style="color: #070707;">Phone Number:</label><br>
+            <input type="number" id="Phone" name="Phone"><br>
+            <label for="datetime-local"style="color: #070707;">Time for call:</label><br>
+            <input type="datetime-local" id="datetime-local" name="datetime-local">
+            <input type="time" id="time" name="time"><br>
+            <input type="button" value="GET A CALL" id="submitBtn" >
+        </form>
+    </div>
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', function () {
+
+        const form = document.getElementById('callForm'); // Get the form element
+        const submitButton = document.getElementById('submitBtn'); 
+
+        function handleFormSubmit(event) {
+                
+                // Get user input values
+                const name = document.getElementById('fname').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('Phone').value;
+                const dateTime = document.getElementById('datetime-local').value;
+                const time = document.getElementById('time').value;
+
+                // Log user input to the console
+                console.log('Name:', name);
+                console.log('Email Id:', email);
+                console.log('Phone Number:', phone);
+                console.log('Time for call:', dateTime + ' ' + time);
+
+
+                form.reset();
+
+               
+        }
+        submitButton.addEventListener('click', handleFormSubmit);
+    });
+
+    </script>
+</body>
+</html>
