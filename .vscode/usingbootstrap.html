@@ -112,11 +112,20 @@
                 const dateTime = document.getElementById('datetime-local').value;
                 const time = document.getElementById('time').value;
 
-                // Log user input to the console
-                console.log('Name:', name);
-                console.log('Email Id:', email);
-                console.log('Phone Number:', phone);
-                console.log('Time for call:', dateTime + ' ' + time);
+                //creating object to store details
+                const userDetails = {
+                name: name,
+                email: email,
+                phone: phone,
+                dateTime: dateTime,
+                time: time
+                };
+
+                const userDetailsString = JSON.stringify(userDetails);
+
+                localStorage.setItem('userDetails',userDetailsString);
+
+                console.log(userDetails);
 
                 // Clear the form fields (optional)
                 form.reset();
