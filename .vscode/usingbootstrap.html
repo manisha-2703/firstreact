@@ -125,7 +125,10 @@
 
                 localStorage.setItem('userDetails',userDetailsString);
 
-                console.log(userDetails);
+                let userDetailsObject = JSON.parse(localStorage.getItem("userDetails"));
+                console.log(userDetailsObject);
+
+                //console.log(userDetails);
 
                 // Clear the form fields (optional)
                 form.reset();
