@@ -13,8 +13,6 @@
             background-position: top;
             font-family: sans-serif;
         }
-
-
         .brand-name {
             color: #611540;
             font-size: 24px;
@@ -98,26 +96,21 @@
         </div>
     </div>
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+     document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('callForm');
     const submitButton = document.getElementById('submitBtn');
+    const userListContainer = document.createElement('div');  // Create a container for user details
+    userListContainer.id = 'userList';
+    document.body.appendChild(userListContainer);  // Append it to the body
 
-    // Function to create and display user details
+    // Function to display user details
     function displayUserDetails(userDetailsList) {
-        // Get the body element
-        const body = document.getElementsByTagName('body')[0];
+        userListContainer.innerHTML = '';
 
-        // Create a div to hold user details
-        const userListContainer = document.createElement('div');
-        userListContainer.id = 'userList';
-        userListContainer.classList.add('container');  // Optional: Add Bootstrap container class
-
-        // Iterate through the user details and create elements to display them
-        userDetailsList.forEach(userDetails => {
+        userDetailsList.forEach((userDetails, index) => {
             const userDiv = document.createElement('div');
-            userDiv.classList.add('user-details'); // Optional: Add a CSS class for styling
+            userDiv.classList.add('user-details');
 
             const nameParagraph = document.createElement('p');
             nameParagraph.textContent = `Name: ${userDetails.name}`;
@@ -131,20 +124,33 @@
             const dateTimeParagraph = document.createElement('p');
             dateTimeParagraph.textContent = `Date and Time: ${userDetails.dateTime} ${userDetails.time}`;
 
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => {
+               
+                console.log('Edit button clicked for index', index);
+            });
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+                userDetailsList.splice(index, 1);
+                localStorage.setItem('userDetails', JSON.stringify(userDetailsList));
+                displayUserDetails(userDetailsList);
+            });
+
             userDiv.appendChild(nameParagraph);
             userDiv.appendChild(emailParagraph);
             userDiv.appendChild(phoneParagraph);
             userDiv.appendChild(dateTimeParagraph);
+            userDiv.appendChild(editButton);
+            userDiv.appendChild(deleteButton);
 
             userListContainer.appendChild(userDiv);
         });
-
-        // Append the userListContainer to the body
-        body.appendChild(userListContainer);
     }
 
     function handleFormSubmit(event) {
-        // Get user input values
         const name = document.getElementById('fname').value;
         const email = document.getElementById('email').value;
         const phone = document.getElementById('Phone').value;
@@ -163,27 +169,20 @@
 
         userDetailsList.push(userDetails);
 
-        const userDetailsString = JSON.stringify(userDetailsList);
-        localStorage.setItem('userDetails', userDetailsString);
+        localStorage.setItem('userDetails', JSON.stringify(userDetailsList));
 
-        let userDetailsObject = JSON.parse(localStorage.getItem('userDetails'));
-        console.log(userDetailsObject);
-
-        // Display user details
         displayUserDetails(userDetailsList);
-
-        // Clear the form fields (optional)
         form.reset();
     }
 
     submitButton.addEventListener('click', handleFormSubmit);
 
-    // Load and display existing user details on page load
     const existingUserDetails = JSON.parse(localStorage.getItem('userDetails')) || [];
     displayUserDetails(existingUserDetails);
 });
 
-        
+
+
     </script>
 </body>
 </html>
